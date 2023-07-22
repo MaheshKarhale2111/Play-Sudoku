@@ -1,0 +1,371 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&display=swap');
+
+
+:root {
+    --bg-main: #032330;
+    --bg-body: #5b7740;
+    --color-txt: #FFFFD0;
+    --filled-color: #A3C7D6;
+    --filled-bg: #1e294e;
+
+  --white: #fff;
+  --yellow: #FFC54D;
+  --red: #e91e63;
+  --black: #000;
+
+  --sudoku-cell-size: 60px;
+
+  --border-radius: 10px;
+
+  --space-y: 25px;
+
+  --gap: 8px;
+
+  --font-size: 1.5rem;
+  --font-size-lg: 2rem;
+  --font-size-xl: 3rem;
+}
+
+body {
+    font-family: 'Kanit', sans-serif;
+  /* height: 100vh; */
+  background-color: var(--bg-body);
+  overflow-x: hidden;
+  user-select: none;
+}
+
+input {
+  font-family: 'Kanit', sans-serif;
+  border: 2px solid var(--bg-main);
+  color: var(--color-txt);
+}
+input:hover, input:focus {
+  border-color: var(--yellow);
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.navbar{
+    background-color: #315423 !important;
+}
+
+.navbar-brand {
+    color: white !important;
+    font-family: "Potta One", cursive;
+    font-size: 2rem;
+}
+
+
+
+.main{
+    padding-top: rem;
+    display: grid;
+    place-items: center;
+}
+.screen{
+    /* background-color: #caf0f8; */
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    min-width: 600px;
+}
+.start-screen{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.start-screen.active {
+    transform: translateX(0);
+}
+
+.start-screen > * + * {
+    margin-top: 20px;
+}
+
+.input-name {
+    height: 80px;
+    width: 240px;
+    border-radius: var(--border-radius);
+    outline: 0;
+    background-color: var(--bg-main);
+    padding: 20px;
+    font-size: var(--font-size-lg);
+    text-align: center;
+}
+
+.btn{
+    height: 80px;
+    width: 240px;
+    color: var(--color-txt);
+    background-color: var(--bg-main);
+    border-radius: var(--border-radius);
+    display: grid;
+    place-items: center;
+    transition: width 0.3s ease-in-out;
+    overflow: hidden;
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+}
+
+.btn:hover{
+    color: var(--yellow);
+}
+.input-err {
+    border-color: var(--red);
+    animation: bounce 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes bounce {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(20px);
+    }
+    50% {
+        transform: translateX(-20px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+/* main game  */
+.main-game {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 0;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.main-game.active {
+    transform: translateX(0);
+}
+.main-sudoku-grid{
+    display: grid;
+    gap: var(--gap);
+    grid-template-columns: repeat(9, auto);
+}
+
+.main-grid-cell {
+    height: var(--sudoku-cell-size);
+    width: var(--sudoku-cell-size);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-main);
+    color: var(--yellow);
+    display: grid;
+    place-items: center;
+    font-size: var(--font-size);
+    cursor: pointer;
+}
+
+.main-grid-cell.filled {
+    background-color: var(--filled-bg);
+    color: var(--filled-color);
+}
+
+.main-grid-cell.selected {
+    background-color: var(--yellow);
+    color: var(--white);
+}
+
+.main-grid-cell:hover {
+    border: 2px solid var(--yellow);
+}
+
+.main-grid-cell.hover {
+    border: 3px solid var(--yellow);
+}
+
+.main-game-info {
+    margin-top: var(--space-y);
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.main-game-info-box {
+    height: 45px;
+    background-color: var(--bg-main);
+    color: var(--color-txt);
+    border-radius: var(--border-radius);
+    display: grid;
+    place-items: center;
+    padding: 0 20px;
+    font-size: var(--font-size);
+}
+
+.main-game-info-time {
+    position: relative;
+    margin-top: 1rem;
+    align-items: center;
+    justify-content: center;
+    padding-left: 2rem;
+    margin-bottom: 0;
+}
+
+.pause-btn {
+    position: absolute;
+    right: 10px;
+    height: 30px;
+    width: 30px;
+    border-radius: var(--border-radius);
+    background-color: var(--yellow);
+    color: var(--white);
+    font-size: var(--font-size);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+.numbers {
+    margin-top: var(--space-y);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+}
+
+.number {
+    height: var(--sudoku-cell-size);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-main);
+    color: var(--color-txt);
+    display: grid;
+    place-items: center;
+    font-size: var(--font-size);
+    cursor: pointer;
+}
+
+.delete {
+    background-color: var(--red);
+    color: var(--white);
+    height: var(--sudoku-cell-size);
+    border-radius: var(--border-radius);
+    display: grid;
+    place-items: center;
+    font-size: var(--font-size);
+    cursor: pointer;
+}
+
+
+.pause-screen,
+.result-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-body);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: none;
+}
+
+.pause-screen.active,
+.result-screen.active {
+    display: flex;
+}
+
+.pause-screen > * + *,
+.result-screen > * + * {
+    margin-top: 20px;
+}
+
+.result-screen.active div {
+    animation: zoom-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pause-screen.active .btn {
+    animation: zoom-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.result-screen .congrate {
+    font-size: var(--font-size-xl);
+    color: var(--yellow);
+}
+
+.result-screen .info {
+    color: var(--color-txt);
+    font-size: var(--font-size);
+}
+
+#result-time {
+    color: var(--yellow);
+    font-size: var(--font-size-xl);
+}
+
+.zoom-in {
+    animation: zoom-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+
+.cell-err {
+    transform: scale(1.5);
+    transition: ease-out;
+    border-color: red !important;
+}
+
+
+@media only screen and (max-width: 800px) {
+    :root {
+        --nav-size: 50px;
+
+        --sudoku-cell-size: 30px;
+
+        --border-radius: 5px;
+
+        --space-y: 10px;
+
+        --gap: 2px;
+
+        --font-size: 1rem;
+        --font-size-lg: 1.5rem;
+        --font-size-xl: 2rem;
+    }
+
+    .input-name,
+    .btn {
+        height: 50px;
+    }
+
+    .main-grid-cell.hover {
+        border-width: 2px;
+    }
+
+    .screen {
+        min-width: unset;
+    }
+
+    .main {
+        height: 60vh;
+    }
+}
+
+
+
+
+
+
